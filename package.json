@@ -1,0 +1,16 @@
+{
+  "name": "coffee_reminder",
+  "version": "0.1.0",
+  "description": "Telegram coffee reminder bot",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "live": "nodemon index.js"
+  },
+  "author": "Viktar Kaniushyk",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^6.1.0",
+    "telegraf": "^3.24.1"
+  }
+}
