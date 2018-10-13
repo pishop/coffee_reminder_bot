@@ -17,11 +17,13 @@ export class IntervalHelper {
 
         IntervalHelper.intervals[chatId] = setInterval(async () => {
             const date = new Date();
-            const [hours, minutes] = [date.getHours(), date.getMinutes()];
+            const milisec = ((date.getTimezoneOffset() / 60 * -1) - 3) * 60 * 60 * 1000;
+            const dataMinsk = new Date(date.getTime() + milisec);
+            const [hours, minutes] = [dataMinsk.getHours(), dataMinsk.getMinutes()];
             console.log('checked', schedule, hours, minutes);
             if (schedule.indexOf(`${hours}:${minutes < 10 ? '0' + minutes : minutes}`) !== -1) {
                 telegram.sendSticker(chatId, 'CAADAgADnwADV08VCMRycuQqC77iAg');
             }
-        }, 60000);
+        }, 10000);
     }
 }
