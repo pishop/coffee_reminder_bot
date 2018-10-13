@@ -20,6 +20,7 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 const telegram = new Telegram(process.env.BOT_TOKEN);
 
 bot.start(async ctx => {
+    console.log('start');
     const chat = await ctx.getChat();
     IntervalHelper.updateInterval(chat.id, client, telegram);
     ctx.replyWithSticker('CAADAgADxQADV08VCEQYKX_LsRKaAg')

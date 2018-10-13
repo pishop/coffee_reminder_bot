@@ -48,16 +48,17 @@ bot.start(function () {
             while (1) {
                 switch (_context.prev = _context.next) {
                     case 0:
-                        _context.next = 2;
+                        console.log('start');
+                        _context.next = 3;
                         return ctx.getChat();
 
-                    case 2:
+                    case 3:
                         chat = _context.sent;
 
                         _intervalHelper.IntervalHelper.updateInterval(chat.id, client, telegram);
                         ctx.replyWithSticker('CAADAgADxQADV08VCEQYKX_LsRKaAg');
 
-                    case 5:
+                    case 6:
                     case 'end':
                         return _context.stop();
                 }

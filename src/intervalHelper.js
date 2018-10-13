@@ -18,7 +18,7 @@ export class IntervalHelper {
         IntervalHelper.intervals[chatId] = setInterval(async () => {
             const date = new Date();
             const [hours, minutes] = [date.getHours(), date.getMinutes()];
-
+            console.log('checked', schedule, hours, minutes);
             if (schedule.indexOf(`${hours}:${minutes < 10 ? '0' + minutes : minutes}`) !== -1) {
                 telegram.sendSticker(chatId, 'CAADAgADnwADV08VCMRycuQqC77iAg');
             }

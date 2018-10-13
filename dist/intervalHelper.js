@@ -57,12 +57,12 @@ var IntervalHelper = exports.IntervalHelper = function () {
                                                     date = new Date();
                                                     _ref3 = [date.getHours(), date.getMinutes()], hours = _ref3[0], minutes = _ref3[1];
 
-
+                                                    console.log('checked', schedule, hours, minutes);
                                                     if (schedule.indexOf(hours + ':' + (minutes < 10 ? '0' + minutes : minutes)) !== -1) {
                                                         telegram.sendSticker(chatId, 'CAADAgADnwADV08VCMRycuQqC77iAg');
                                                     }
 
-                                                case 3:
+                                                case 4:
                                                 case 'end':
                                                     return _context.stop();
                                             }
