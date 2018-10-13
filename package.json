@@ -7,7 +7,8 @@
     "start": "NODE_ENV=dev nodemon --exec babel-node src/index.js",
     "clean": "rm -rf ./dist && mkdir ./dist",
     "build-server": "babel -d ./dist ./src -s",
-    "build": "yarn clean && yarn build-server"
+    "build": "yarn clean && yarn build-server",
+    "heroku-postbuild": "yarn build"
   },
   "author": "Viktar Kaniushyk",
   "license": "ISC",
