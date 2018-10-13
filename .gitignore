@@ -2,4 +2,3 @@
 /.git
 /.idea
 .env
-/dist/*
