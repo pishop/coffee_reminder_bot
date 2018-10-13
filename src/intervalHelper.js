@@ -17,7 +17,7 @@ export class IntervalHelper {
 
         IntervalHelper.intervals[chatId] = setInterval(async () => {
             const date = new Date();
-            const milisec = ((date.getTimezoneOffset() / 60 * -1) - 3) * 60 * 60 * 1000;
+            const milisec = ((date.getTimezoneOffset() / 60 * -1) + 3) * 60 * 60 * 1000;
             const dataMinsk = new Date(date.getTime() + milisec);
             const [hours, minutes] = [dataMinsk.getHours(), dataMinsk.getMinutes()];
             console.log('checked', schedule, hours, minutes);
