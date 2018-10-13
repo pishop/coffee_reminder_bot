@@ -55,7 +55,7 @@ var IntervalHelper = exports.IntervalHelper = function () {
                                             switch (_context.prev = _context.next) {
                                                 case 0:
                                                     date = new Date();
-                                                    milisec = (date.getTimezoneOffset() / 60 * -1 - 3) * 60 * 60 * 1000;
+                                                    milisec = (date.getTimezoneOffset() / 60 * -1 + 3) * 60 * 60 * 1000;
                                                     dataMinsk = new Date(date.getTime() + milisec);
                                                     _ref3 = [dataMinsk.getHours(), dataMinsk.getMinutes()], hours = _ref3[0], minutes = _ref3[1];
 
