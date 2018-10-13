@@ -1,3 +1,5 @@
+import { IntervalHelper } from './intervalHelper';
+
 export default function(bot, telegram, client) {
     bot.command('add', async (ctx) => {
         const chatId = ctx.message.chat.id;
@@ -28,6 +30,7 @@ export default function(bot, telegram, client) {
             }
 
             telegram.sendSticker(chatId, 'CAADAgADnAADV08VCF49wTfBNSDPAg');
+            IntervalHelper.updateInterval(chatId, client, telegram);
         } else {
             telegram.sendMessage(chatId, 'Пиши нормально!');
         }
@@ -47,6 +50,7 @@ export default function(bot, telegram, client) {
         if (schedule.indexOf(`${hours}:${minutes}`) !== -1) {
             await client.setAsync(chatId, schedule.split('.').filter(t => t !== `${hours}:${minutes}`).join('.'));
             telegram.sendSticker(chatId, 'CAADAgADmAADV08VCDNXeDKFVNRvAg');
+            IntervalHelper.updateInterval(chatId, client, telegram);
         } else {
             telegram.sendMessage(chatId, 'Пиши нормально!');
         }
@@ -56,6 +60,7 @@ export default function(bot, telegram, client) {
         const chatId = ctx.message.chat.id;
         await client.delAsync(chatId);
         telegram.sendSticker(chatId, 'CAADAgADoAADV08VCBicBX8exqU0Ag');
+        IntervalHelper.updateInterval(chatId, client, telegram);
     });
 
     bot.command('fast', ctx => {
