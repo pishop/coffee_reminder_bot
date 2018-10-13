@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import Telegraf from 'telegraf';
 import Telegram from 'telegraf/telegram';
 import redis from 'redis';

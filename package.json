@@ -4,11 +4,16 @@
   "description": "Telegram coffee reminder bot",
   "main": "src/index.js",
   "scripts": {
-    "start": "NODE_ENV=dev nodemon --exec babel-node src/index.js"
+    "start": "NODE_ENV=dev nodemon --exec babel-node src/index.js",
+    "clean": "rm -rf dist && mkdir dist",
+    "build-server": "babel -d ./dist ./src -s",
+    "build": "yarn clean && yarn build-server",
+    "start-build": "NODE_ENV=dev node ./dist/index.js"
   },
   "author": "Viktar Kaniushyk",
   "license": "ISC",
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "bluebird": "^3.5.2",
     "dotenv": "^6.1.0",
     "redis": "^2.8.0",
