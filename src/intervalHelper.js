@@ -17,6 +17,7 @@ export class IntervalHelper {
 
         IntervalHelper.intervals[chatId] = setInterval(async () => {
             const date = new Date();
+            // convert to Minsk timezone TODO FIX
             const milisec = ((date.getTimezoneOffset() / 60 * -1) + 3) * 60 * 60 * 1000;
             const dataMinsk = new Date(date.getTime() + milisec);
             const [hours, minutes] = [dataMinsk.getHours(), dataMinsk.getMinutes()];
@@ -24,6 +25,6 @@ export class IntervalHelper {
             if (schedule.indexOf(`${hours}:${minutes < 10 ? '0' + minutes : minutes}`) !== -1) {
                 telegram.sendSticker(chatId, 'CAADAgADnwADV08VCMRycuQqC77iAg');
             }
-        }, 10000);
+        }, 60000);
     }
 }
