@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "NODE_ENV=dev nodemon --exec babel-node src/index.js",
-    "clean": "rm -rf dist && mkdir dist",
+    "clean": "rm -rf ./dist && mkdir ./dist",
     "build-server": "babel -d ./dist ./src -s",
     "build": "yarn clean && yarn build-server"
   },
