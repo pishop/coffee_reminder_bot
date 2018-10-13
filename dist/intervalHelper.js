@@ -48,27 +48,29 @@ var IntervalHelper = exports.IntervalHelper = function () {
                             case 6:
 
                                 IntervalHelper.intervals[chatId] = setInterval(_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                                    var date, _ref3, hours, minutes;
+                                    var date, milisec, dataMinsk, _ref3, hours, minutes;
 
                                     return regeneratorRuntime.wrap(function _callee$(_context) {
                                         while (1) {
                                             switch (_context.prev = _context.next) {
                                                 case 0:
                                                     date = new Date();
-                                                    _ref3 = [date.getHours(), date.getMinutes()], hours = _ref3[0], minutes = _ref3[1];
+                                                    milisec = (date.getTimezoneOffset() / 60 * -1 - 3) * 60 * 60 * 1000;
+                                                    dataMinsk = new Date(date.getTime() + milisec);
+                                                    _ref3 = [dataMinsk.getHours(), dataMinsk.getMinutes()], hours = _ref3[0], minutes = _ref3[1];
 
                                                     console.log('checked', schedule, hours, minutes);
                                                     if (schedule.indexOf(hours + ':' + (minutes < 10 ? '0' + minutes : minutes)) !== -1) {
                                                         telegram.sendSticker(chatId, 'CAADAgADnwADV08VCMRycuQqC77iAg');
                                                     }
 
-                                                case 4:
+                                                case 6:
                                                 case 'end':
                                                     return _context.stop();
                                             }
                                         }
                                     }, _callee, _this);
-                                })), 60000);
+                                })), 10000);
 
                             case 7:
                             case 'end':
