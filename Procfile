@@ -1,1 +1,1 @@
-worker: node ./dist/app
+worker: node ./dist
