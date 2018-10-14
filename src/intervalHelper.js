@@ -21,7 +21,7 @@ export class IntervalHelper {
             const milisec = ((date.getTimezoneOffset() / 60 * -1) + 3) * 60 * 60 * 1000;
             const dataMinsk = new Date(date.getTime() + milisec);
             const [hours, minutes] = [dataMinsk.getHours(), dataMinsk.getMinutes()];
-            if (schedule.indexOf(`${hours}:${minutes < 10 ? '0' + minutes : minutes}`) !== -1) {
+            if (schedule.split('.').find(t => t === `${hours}:${minutes < 10 ? '0' + minutes : minutes}`)) {
                 telegram.sendSticker(chatId, 'CAADAgADnwADV08VCMRycuQqC77iAg');
             }
         }, 60000);
