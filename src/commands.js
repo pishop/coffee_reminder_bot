@@ -2,6 +2,7 @@ import { IntervalHelper } from './intervalHelper';
 
 export default function(bot, telegram, client) {
     bot.command('add', async (ctx) => {
+        console.log('add', ctx.message);
         const chatId = ctx.message.chat.id;
         const regExp = /\/add ([0-9]{2}:[0-9]{2})/;
         const result = regExp.exec(ctx.message.text);
@@ -37,6 +38,7 @@ export default function(bot, telegram, client) {
     });
 
     bot.command('remove', async (ctx) => {
+        console.log('remove', ctx.message);
         const chatId = ctx.message.chat.id;
         const regExp = /\/remove ([0-9]{2}:[0-9]{2})/;
         const result = regExp.exec(ctx.message.text);
@@ -57,6 +59,7 @@ export default function(bot, telegram, client) {
     });
 
     bot.command('clear', async (ctx) => {
+        console.log('clear', ctx.message);
         const chatId = ctx.message.chat.id;
         await client.delAsync(chatId);
         telegram.sendSticker(chatId, 'CAADAgADoAADV08VCBicBX8exqU0Ag');
@@ -64,10 +67,12 @@ export default function(bot, telegram, client) {
     });
 
     bot.command('fast', ctx => {
+        console.log('fast', ctx.message);
         const chatId = ctx.message.chat.id;
         telegram.sendSticker(chatId, 'CAADAgADnwADV08VCMRycuQqC77iAg');
     });
     bot.command('list', async ctx => {
+        console.log('list', ctx.message);
         const chatId = ctx.message.chat.id;
         const schedulle = await client.getAsync(chatId);
 
