@@ -1,14 +1,15 @@
-import { IntervalHelper } from './intervalHelper';
-
-export default function(bot, telegram, client) {
+export default function(bot, telegram, client, intervals, queue) {
     bot.command('add', async (ctx) => {
-        console.log('add', ctx.message);
         const chatId = ctx.message.chat.id;
+        if (chatId === 104990728) {
+            queue.addMessage(telegram.sendMessage, { chatId, message: 'Дима, не балуй!'});
+            return;
+        }
         const regExp = /\/add ([0-9]{2}:[0-9]{2})/;
         const result = regExp.exec(ctx.message.text);
 
         if (!result || !result[1]) {
-            telegram.sendMessage(chatId, 'Пиши нормально!');
+            queue.addMessage(telegram.sendMessage, { chatId, message: 'Пиши нормально!'});
             return;
         }
 
@@ -22,7 +23,7 @@ export default function(bot, telegram, client) {
             } else {
                 const res = schedule.split('.');
                 if (res.find(t => t === timeString)) {
-                    telegram.sendMessage(chatId, 'Пиши нормально!');
+                    queue.addMessage(telegram.sendMessage, { chatId, message: 'Пиши нормально!'});
                     return;
                 }
 
@@ -30,57 +31,69 @@ export default function(bot, telegram, client) {
                 await client.setAsync(chatId, res.sort().join('.'));
             }
 
-            telegram.sendSticker(chatId, 'CAADAgADnAADV08VCF49wTfBNSDPAg');
-            IntervalHelper.updateInterval(chatId, client, telegram);
+            queue.addMessage(telegram.sendSticker, { chatId, sticker: 'CAADAgADnAADV08VCF49wTfBNSDPAg'});
+            intervals.updateInterval(chatId);
         } else {
-            telegram.sendMessage(chatId, 'Пиши нормально!');
+            queue.addMessage(telegram.sendMessage, { chatId, message: 'Пиши нормально!'});
         }
     });
 
     bot.command('remove', async (ctx) => {
-        console.log('remove', ctx.message);
         const chatId = ctx.message.chat.id;
+        if (chatId === 104990728) {
+            queue.addMessage(telegram.sendMessage, { chatId, message: 'Дима, не балуй!'});
+            return;
+        }
         const regExp = /\/remove ([0-9]{2}:[0-9]{2})/;
         const result = regExp.exec(ctx.message.text);
         const schedule = await client.getAsync(chatId);
         if (!result || !result[1]) {
-            telegram.sendMessage(chatId, 'Пиши нормально!');
+            queue.addMessage(telegram.sendMessage, { chatId, message: 'Пиши нормально!'});
             return;
         }
 
         const [hours, minutes] = result[1].split(':');
         if (schedule.indexOf(`${hours}:${minutes}`) !== -1) {
             await client.setAsync(chatId, schedule.split('.').filter(t => t !== `${hours}:${minutes}`).join('.'));
-            telegram.sendSticker(chatId, 'CAADAgADmAADV08VCDNXeDKFVNRvAg');
-            IntervalHelper.updateInterval(chatId, client, telegram);
+            queue.addMessage(telegram.sendSticker, { chatId, sticker: 'CAADAgADmAADV08VCDNXeDKFVNRvAg'});
+            intervals.updateInterval(chatId);
         } else {
-            telegram.sendMessage(chatId, 'Пиши нормально!');
+            queue.addMessage(telegram.sendMessage, { chatId, message: 'Пиши нормально!'});
         }
     });
 
     bot.command('clear', async (ctx) => {
-        console.log('clear', ctx.message);
         const chatId = ctx.message.chat.id;
+        if (chatId === 104990728) {
+            queue.addMessage(telegram.sendMessage, { chatId, message: 'Дима, не балуй!'});
+            return;
+        }
         await client.delAsync(chatId);
-        telegram.sendSticker(chatId, 'CAADAgADoAADV08VCBicBX8exqU0Ag');
-        IntervalHelper.updateInterval(chatId, client, telegram);
+        queue.addMessage(telegram.sendSticker, { chatId, sticker: 'CAADAgADoAADV08VCBicBX8exqU0Ag'});
+        intervals.updateInterval(chatId);
     });
 
     bot.command('fast', ctx => {
-        console.log('fast', ctx.message);
         const chatId = ctx.message.chat.id;
-        telegram.sendSticker(chatId, 'CAADAgADnwADV08VCMRycuQqC77iAg');
+        if (chatId === 104990728) {
+            queue.addMessage(telegram.sendMessage, { chatId, message: 'Дима, не балуй!'});
+            return;
+        }
+        queue.addMessage(telegram.sendSticker, { chatId, sticker: 'CAADAgADnwADV08VCMRycuQqC77iAg'});
     });
     bot.command('list', async ctx => {
-        console.log('list', ctx.message);
         const chatId = ctx.message.chat.id;
+        if (chatId === 104990728) {
+            queue.addMessage(telegram.sendMessage, { chatId, message: 'Дима, не балуй!'});
+            return;
+        }
         const schedulle = await client.getAsync(chatId);
 
         if (schedulle === null) {
-            telegram.sendMessage(chatId, 'Ничего нет');
+            queue.addMessage(telegram.sendMessage, { chatId, message: 'Ничего нет'});
             return;
         }
 
-        telegram.sendMessage(chatId, 'Пойдем в ' + schedulle.split('.').join(', '));
+        queue.addMessage(telegram.sendMessage, { chatId, message: 'Пойдем в ' + schedulle.split('.').join(', ')});
     });
 }
