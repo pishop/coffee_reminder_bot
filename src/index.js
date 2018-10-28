@@ -36,4 +36,4 @@ bot.start(async ctx => {
 
 initCommands(bot, client, intervals, queue);
 bot.startPolling();
-console.log(`Server ready!`);
+console.log(`Server ready!`, `Server time: ${new Date()}`);
