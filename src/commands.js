@@ -1,5 +1,7 @@
+const username = 'coffee_2_bot';
+
 export default function(bot, client, intervals, queue) {
-    bot.command('add', async (ctx) => {
+    bot.command(['add', `add@${username}`], async (ctx) => {
         const chatId = ctx.message.chat.id;
         if (chatId === 104990728) {
             queue.addMessage('sendMessage', chatId, 'Дима, не балуй!');
@@ -38,7 +40,7 @@ export default function(bot, client, intervals, queue) {
         }
     });
 
-    bot.command('remove', async (ctx) => {
+    bot.command(['remove', `remove@${username}`], async (ctx) => {
         const chatId = ctx.message.chat.id;
         if (chatId === 104990728) {
             queue.addMessage('sendMessage', chatId, 'Дима, не балуй!');
@@ -62,7 +64,7 @@ export default function(bot, client, intervals, queue) {
         }
     });
 
-    bot.command('clear', async (ctx) => {
+    bot.command(['clear', `clear@${username}`], async (ctx) => {
         const chatId = ctx.message.chat.id;
         if (chatId === 104990728) {
             queue.addMessage('sendMessage', chatId, 'Дима, не балуй!');
@@ -73,7 +75,7 @@ export default function(bot, client, intervals, queue) {
         intervals.updateInterval(chatId);
     });
 
-    bot.command('fast', ctx => {
+    bot.command(['fast', `fast@${username}`], ctx => {
         const chatId = ctx.message.chat.id;
         if (chatId === 104990728) {
             queue.addMessage('sendMessage', chatId, 'Дима, не балуй!');
@@ -81,7 +83,7 @@ export default function(bot, client, intervals, queue) {
         }
         queue.addMessage('sendSticker', chatId, 'CAADAgADnwADV08VCMRycuQqC77iAg');
     });
-    bot.command('list', async ctx => {
+    bot.command(['list', `list@${username}`], async ctx => {
         const chatId = ctx.message.chat.id;
         if (chatId === 104990728) {
             queue.addMessage('sendMessage', chatId, 'Дима, не балуй!');
