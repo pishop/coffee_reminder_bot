@@ -23,6 +23,7 @@ client.keys('*', (_, keys) => {
     if (keys) {
         keys.forEach(key => {
             intervals.updateInterval(key);
+            console.log(`Init interval for chat ${key}`);
         });
     }
 });
@@ -33,5 +34,6 @@ bot.start(async ctx => {
     ctx.replyWithSticker('CAADAgADxQADV08VCEQYKX_LsRKaAg')
 });
 
-initCommands(bot, telegram, client, queue);
+initCommands(bot, telegram, client, intervals, queue);
 bot.startPolling();
+console.log(`Server ready!`);
