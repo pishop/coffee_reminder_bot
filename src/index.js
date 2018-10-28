@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === 'dev') {
 
 const client = redis.createClient(process.env.REDIS_URL);
 const bot = new Telegraf(process.env.BOT_TOKEN);
-const telegram = new Telegram(process.env.BOT_TOKEN);
+const telegram = new Telegram(process.env.BOT_TOKEN, { username: 'coffee_2_bot' });
 const intervals = new IntervalHelper(client, telegram);
 const queue = new Queue(telegram);
 
@@ -31,7 +31,7 @@ client.keys('*', (_, keys) => {
 bot.start(async ctx => {
     const chat = await ctx.getChat();
     intervals.updateInterval(chat.id);
-    ctx.replyWithSticker('CAADAgADxQADV08VCEQYKX_LsRKaAg')
+    queue.addMessage('sendSticker', chat.id, 'CAADAgADxQADV08VCEQYKX_LsRKaAg');
 });
 
 initCommands(bot, client, intervals, queue);
