@@ -17,7 +17,7 @@ const client = redis.createClient(process.env.REDIS_URL);
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const telegram = new Telegram(process.env.BOT_TOKEN);
 const intervals = new IntervalHelper(client, telegram);
-const queue = new Queue();
+const queue = new Queue(telegram);
 
 client.keys('*', (_, keys) => {
     if (keys) {
@@ -34,6 +34,6 @@ bot.start(async ctx => {
     ctx.replyWithSticker('CAADAgADxQADV08VCEQYKX_LsRKaAg')
 });
 
-initCommands(bot, telegram, client, intervals, queue);
+initCommands(bot, client, intervals, queue);
 bot.startPolling();
 console.log(`Server ready!`);
