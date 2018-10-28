@@ -1,11 +1,11 @@
 export class Queue {
     messages = {};
 
-    addMessage(method, chatId, param) {
+    addMessage(fn, chatId, param) {
         if (this.messages[chatId]) {
-            this.messages[chatId].push(() => { method(chatId, param) });
+            this.messages[chatId].push(() => fn(chatId, param));
         } else {
-            this.messages[chatId] = [() => method(chatId, param)];
+            this.messages[chatId] = [() => fn(chatId, param)];
         }
 
         const interval = setInterval(() => {
