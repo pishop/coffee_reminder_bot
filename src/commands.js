@@ -2,8 +2,9 @@ const username = 'coffee_2_bot';
 
 export default function(bot, client, intervals, queue) {
     bot.command(['add', `add@${username}`], async (ctx) => {
+        const fromId = ctx.message.from.id;
         const chatId = ctx.message.chat.id;
-        if (chatId === 104990728) {
+        if (fromId === Number(104990728)) {
             queue.addMessage('sendMessage', chatId, 'Дима, не балуй!');
             return;
         }
@@ -41,8 +42,9 @@ export default function(bot, client, intervals, queue) {
     });
 
     bot.command(['remove', `remove@${username}`], async (ctx) => {
+        const fromId = ctx.message.from.id;
         const chatId = ctx.message.chat.id;
-        if (chatId === 104990728) {
+        if (fromId === Number(104990728)) {
             queue.addMessage('sendMessage', chatId, 'Дима, не балуй!');
             return;
         }
@@ -65,8 +67,9 @@ export default function(bot, client, intervals, queue) {
     });
 
     bot.command(['clear', `clear@${username}`], async (ctx) => {
+        const fromId = ctx.message.from.id;
         const chatId = ctx.message.chat.id;
-        if (chatId === 104990728) {
+        if (fromId === Number(104990728)) {
             queue.addMessage('sendMessage', chatId, 'Дима, не балуй!');
             return;
         }
@@ -76,16 +79,18 @@ export default function(bot, client, intervals, queue) {
     });
 
     bot.command(['fast', `fast@${username}`], ctx => {
+        const fromId = ctx.message.from.id;
         const chatId = ctx.message.chat.id;
-        if (chatId === 104990728) {
+        if (fromId === Number(104990728)) {
             queue.addMessage('sendMessage', chatId, 'Дима, не балуй!');
             return;
         }
         queue.addMessage('sendSticker', chatId, 'CAADAgADnwADV08VCMRycuQqC77iAg');
     });
     bot.command(['list', `list@${username}`], async ctx => {
+        const fromId = ctx.message.from.id;
         const chatId = ctx.message.chat.id;
-        if (chatId === 104990728) {
+        if (fromId === Number(104990728)) {
             queue.addMessage('sendMessage', chatId, 'Дима, не балуй!');
             return;
         }
