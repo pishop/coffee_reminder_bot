@@ -2,12 +2,9 @@ const username = 'coffee_2_bot';
 
 export default function(bot, client, intervals, queue) {
     bot.command(['add', `add@${username}`], async (ctx) => {
-        const fromId = ctx.message.from.id;
+
         const chatId = ctx.message.chat.id;
-        if (fromId === Number(104990728)) {
-            queue.addMessage('sendMessage', chatId, 'Дима, не балуй!');
-            return;
-        }
+
         const regExp = /\/add ([0-9]{2}:[0-9]{2})/;
         const result = regExp.exec(ctx.message.text);
 
@@ -42,12 +39,8 @@ export default function(bot, client, intervals, queue) {
     });
 
     bot.command(['remove', `remove@${username}`], async (ctx) => {
-        const fromId = ctx.message.from.id;
         const chatId = ctx.message.chat.id;
-        if (fromId === Number(104990728)) {
-            queue.addMessage('sendMessage', chatId, 'Дима, не балуй!');
-            return;
-        }
+
         const regExp = /\/remove ([0-9]{2}:[0-9]{2})/;
         const result = regExp.exec(ctx.message.text);
         const schedule = await client.getAsync(chatId);
@@ -67,33 +60,20 @@ export default function(bot, client, intervals, queue) {
     });
 
     bot.command(['clear', `clear@${username}`], async (ctx) => {
-        const fromId = ctx.message.from.id;
         const chatId = ctx.message.chat.id;
-        if (fromId === Number(104990728)) {
-            queue.addMessage('sendMessage', chatId, 'Дима, не балуй!');
-            return;
-        }
+
         await client.delAsync(chatId);
         queue.addMessage('sendSticker', chatId, 'CAADAgADoAADV08VCBicBX8exqU0Ag');
         intervals.updateInterval(chatId);
     });
 
     bot.command(['fast', `fast@${username}`], ctx => {
-        const fromId = ctx.message.from.id;
         const chatId = ctx.message.chat.id;
-        if (fromId === Number(104990728)) {
-            queue.addMessage('sendMessage', chatId, 'Дима, не балуй!');
-            return;
-        }
+
         queue.addMessage('sendSticker', chatId, 'CAADAgADnwADV08VCMRycuQqC77iAg');
     });
     bot.command(['list', `list@${username}`], async ctx => {
-        const fromId = ctx.message.from.id;
         const chatId = ctx.message.chat.id;
-        if (fromId === Number(104990728)) {
-            queue.addMessage('sendMessage', chatId, 'Дима, не балуй!');
-            return;
-        }
         const schedulle = await client.getAsync(chatId);
 
         if (schedulle === null) {
